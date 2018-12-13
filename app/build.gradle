@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion version_setup_compileSdk
-    buildToolsVersion version_setup_buildTools
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         minSdkVersion version_setup_minSdk
@@ -109,7 +109,7 @@ dependencies {
         transitive = true
     }
 
-    implementation('com.github.turing-tech:MaterialScrollBar:12.4.0') {
+    implementation('com.github.turing-tech:MaterialScrollBar:13.3.0') {
         exclude group: 'com.android.support'
     }
 

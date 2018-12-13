@@ -99,7 +99,7 @@ public class AppDrawerVertical extends CardView {
     }
 
     private void init() {
-        _itemHeightPadding = Tool.dp2px(15, getContext());
+        _itemHeightPadding = Tool.dp2px(50, getContext());
 
         _scrollBar = _rl.findViewById(R.id.dragScrollBar);
         _scrollBar.setIndicator(new AlphabetIndicator(getContext()), true);
@@ -108,7 +108,7 @@ public class AppDrawerVertical extends CardView {
         _scrollBar.post(new Runnable() {
             @Override
             public void run() {
-                _scrollBar.setHandleColour(Setup.appSettings().getDrawerFastScrollColor());
+                _scrollBar.setHandleColor(Setup.appSettings().getDrawerFastScrollColor());
             }
         });
 

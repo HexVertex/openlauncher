@@ -15,11 +15,13 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -75,6 +77,8 @@ import net.gsantner.opoc.util.ContextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import xyz.no.domain.OverlayDrawerService;
 
 public final class HomeActivity extends Activity implements OnDesktopEditListener, DesktopOptionViewListener {
     public static final Companion Companion = new Companion();
@@ -211,6 +215,19 @@ public final class HomeActivity extends Activity implements OnDesktopEditListene
             decorView.setSystemUiVisibility(1536);
         }
         init();
+
+        if (VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName())));
+                Log.d("Semi-Open", "Nay");
+
+            }
+            if (Settings.canDrawOverlays(this)) {
+                Intent svc = new Intent(this, OverlayDrawerService.class);
+                startService(svc);
+                Log.d("Semi-Open", "Yay!");
+            }
+        }
     }
 
     private void init() {
